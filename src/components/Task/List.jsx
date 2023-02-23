@@ -25,7 +25,7 @@ export default function TaskList({ list, dispatch }) {
                   }
                 />
               </span>
-              <span>{item.title}</span>
+              <span className="text-4xl text-blue-200">{item.title}</span>
               <TaskEdit taskData={item} dispatch={dispatch} />
               <button
                 onClick={() =>
