@@ -37,7 +37,7 @@ export default function TaskAdd({ dispatch }) {
               placeholder="Task Name"
               value={inputs.title || ""}
               onChange={handleChange}
-              className="outline-none focus:outline-none placeholder:text-gray-600 placeholder:font-medium text-lg font-medium my-3"
+              className="outline-none focus:outline-none bg-white text-black placeholder:text-gray-600 placeholder:font-medium text-lg font-medium my-3"
             />
             <textarea
               type="textarea"
@@ -45,16 +45,19 @@ export default function TaskAdd({ dispatch }) {
               placeholder="Description"
               value={inputs.description || ""}
               onChange={handleChange}
-              className="outline-none focus:outline-none"
+              className="outline-none focus:outline-none bg-white text-black"
             />
             <div className="flex space-x-4 justify-end my-4">
               <button
                 onClick={() => setOpen(false)}
-                className="bg-gray-200 px-4 py-2 rounded"
+                className="bg-gray-200 text-black px-4 py-2 rounded"
               >
                 Cancel
               </button>
-              <button type="Submit" className="bg-[#eaa9b1] px-4 py-2 rounded">
+              <button
+                type="Submit"
+                className="bg-[#db4c3f] text-white px-4 py-2 rounded"
+              >
                 Add Task
               </button>
             </div>
