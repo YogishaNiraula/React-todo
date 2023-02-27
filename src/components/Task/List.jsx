@@ -23,7 +23,7 @@ export default function TaskList({ list, dispatch }) {
                         type: "complete",
                         data: {
                           id: item.id,
-                          completed: event.target.checked,
+                          completed: event.target.checked ? "true" : "false",
                         },
                       })
                     }

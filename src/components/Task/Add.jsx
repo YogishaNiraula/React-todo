@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoAdd, IoClose } from "react-icons/io5";
+import { AddTask } from "../../App";
 
 export default function TaskAdd({ dispatch }) {
   const [open, setOpen] = useState(false);
