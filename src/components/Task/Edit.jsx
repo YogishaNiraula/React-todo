@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiEdit3 } from "react-icons/fi";
 
 export default function TaskEdit({ taskData, dispatch }) {
   const [open, setOpen] = useState(false);
@@ -26,17 +27,22 @@ export default function TaskEdit({ taskData, dispatch }) {
   };
   return (
     <div>
-      <button onClick={() => setOpen(true)}>Edit</button>
+      <button onClick={() => setOpen(true)}>
+        <FiEdit3 />
+      </button>
       {open && (
-        <div>
-          <button onClick={() => setOpen(false)}>X</button>
-          <form onSubmit={handleEditSubmit}>
+        <div className="fixed z-10 top-1/5 left-1/3 w-1/4 bg-white border border-gray-200 drop-shadow-2xl rounded-md p-5">
+          <form
+            onSubmit={handleEditSubmit}
+            className="flex flex-col justify-center"
+          >
             <input
               type="text"
               name="title"
               placeholder="Title"
               value={inputs.title}
               onChange={handleChange}
+              className="outline-none focus:outline-none placeholder:text-lg placeholder:font-medium text-lg font-medium my-3"
             />
             <textarea
               type="textarea"
@@ -44,8 +50,22 @@ export default function TaskEdit({ taskData, dispatch }) {
               placeholder="Description of the task"
               value={inputs.description}
               onChange={handleChange}
+              className="outline-none focus:outline-none"
             />
-            <button type="Submit">Edit</button>
+            <div className="flex space-x-4 justify-end my-4">
+              <button
+                onClick={() => setOpen(false)}
+                className="bg-gray-200 px-4 py-2 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                type="Submit"
+                className="bg-[#db4c3f] text-white px-4 py-2 rounded"
+              >
+                Save
+              </button>
+            </div>
           </form>
         </div>
       )}

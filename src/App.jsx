@@ -48,9 +48,10 @@ function App() {
     },
   ]);
   return (
-    <div className="App">
-      <TaskAdd dispatch={dispatch} />
+    <div className="App mx-10 2xl:mx-auto relative">
+      <h5 className="text-xl font-medium">Tasks</h5>
       <TaskList list={tasks} dispatch={dispatch} />
+      <TaskAdd dispatch={dispatch} />
     </div>
   );
 }
