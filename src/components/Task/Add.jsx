@@ -36,6 +36,7 @@ export default function TaskAdd({ dispatch }) {
               type="text"
               name="title"
               placeholder="Task Name"
+              required
               value={inputs.title || ""}
               onChange={handleChange}
               className="outline-none focus:outline-none bg-white text-black placeholder:text-gray-600 placeholder:font-medium text-lg font-medium my-3"

@@ -41,6 +41,7 @@ export default function TaskEdit({ taskData, dispatch }) {
               name="title"
               placeholder="Title"
               value={inputs.title}
+              required
               onChange={handleChange}
               className="outline-none focus:outline-none placeholder:text-lg placeholder:font-medium text-lg font-medium my-3 bg-white text-black"
             />
