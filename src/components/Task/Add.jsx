@@ -15,6 +15,7 @@ export default function TaskAdd({ dispatch }) {
     event.preventDefault();
     dispatch({ type: "add", data: inputs });
     setOpen(false);
+    setInputs({});
   };
   return (
     <div>
