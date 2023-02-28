@@ -172,8 +172,11 @@ function App() {
 
   useEffect(() => {
     insertDataInDB();
-    getAllTasks();
   }, []);
+
+  useEffect(() => {
+    getAllTasks();
+  }, [allTasks]);
 
   return (
     <div className="App mx-10 2xl:mx-auto relative">
