@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import "./App.css";
+import Layout from "./components/Layout/Layout";
 import TaskAdd from "./components/Task/Add";
 import TaskList from "./components/Task/List";
 
@@ -179,11 +180,13 @@ function App() {
   }, [allTasks]);
 
   return (
-    <div className="App mx-10 2xl:mx-auto relative">
-      <h5 className="text-xl font-medium">Tasks</h5>
-      <TaskList list={allTasks} dispatch={dispatch} />
-      <TaskAdd dispatch={dispatch} />
-    </div>
+    <Layout>
+      <div className="App mx-10 2xl:mx-auto relative">
+        <h5 className="text-xl font-medium">Tasks</h5>
+        <TaskList list={allTasks} dispatch={dispatch} />
+        <TaskAdd dispatch={dispatch} />
+      </div>
+    </Layout>
   );
 }
 
