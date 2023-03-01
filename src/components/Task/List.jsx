@@ -13,7 +13,7 @@ export default function TaskList({ list, dispatch }) {
             >
               <span className="flex items-center">
                 <span>
-                  <input
+                  {/* <input
                     className="appearance-none border-2 border-blue-500 bg-blue-300 p-2 rounded-full mx-2 cursor-pointer"
                     type="checkbox"
                     name="complete"
@@ -27,11 +27,11 @@ export default function TaskList({ list, dispatch }) {
                         },
                       })
                     }
-                  />
+                  /> */}
                 </span>
                 <span className="text-lg mb-2">{item.title}</span>
               </span>
-              <span className="flex space-x-3">
+              {/* <span className="flex space-x-3">
                 <TaskEdit taskData={item} dispatch={dispatch} />
                 <button
                   onClick={() =>
@@ -45,7 +45,7 @@ export default function TaskList({ list, dispatch }) {
                 >
                   <MdDeleteOutline />
                 </button>
-              </span>
+              </span> */}
             </li>
           );
         })}

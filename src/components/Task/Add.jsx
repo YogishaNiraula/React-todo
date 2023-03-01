@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoAdd, IoClose } from "react-icons/io5";
+import { createTask } from "../../utils/task";
 
 export default function TaskAdd({ dispatch }) {
   const [open, setOpen] = useState(false);
@@ -9,11 +10,16 @@ export default function TaskAdd({ dispatch }) {
     const new_id = Math.floor(Math.random() * 1000);
     const name = event.target.name;
     const value = event.target.value;
-    setInputs((values) => ({ ...values, id: new_id, [name]: value }));
+    setInputs((values) => ({
+      ...values,
+      id: new_id,
+      [name]: value,
+      completed: "false",
+    }));
   };
-  const handleAddSubmit = (event) => {
+  const handleAddSubmit = async (event) => {
     event.preventDefault();
-    dispatch({ type: "add", data: inputs });
+    await createTask({ project_id: "tq6zmi8", task: inputs });
     setOpen(false);
     setInputs({});
   };
