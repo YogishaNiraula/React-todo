@@ -14,6 +14,7 @@ export async function createProject(project_name) {
 }
 
 export async function getProjects() {
+  console.log(await openDB("Projects", 1));
   const db = await openDB("Projects", 1);
   const tx = db.transaction("projects", "readonly");
   let response = await tx.store.getAll();

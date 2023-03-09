@@ -1,11 +1,12 @@
 import { openDB } from "idb";
 
 export async function insertDataInDB() {
-  const db = await openDB("Projects", 1, {
-    upgrade(db) {
-      db.createObjectStore("projects", { keypath: "id" });
-    },
+  const dbPromise = await openDB("Projects", 1, (upgradeDB) => {
+    console.log(upgradeDB.objectStoreNames);
+    upgradeDB.createObjectStore("projects", { keyPath: "id" });
   });
-  const transaction = db.transaction("projects", "readwrite");
+  console.log(dbPromise);
+
+  const transaction = dbPromise.transaction("projects", "readwrite");
   await transaction.done;
 }

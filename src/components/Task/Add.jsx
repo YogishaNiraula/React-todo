@@ -16,7 +16,7 @@ export default function TaskAdd() {
         onClick={() => setOpen(true)}
         className="flex items-center space-x-3 my-3 "
       >
-        <IoAdd className="text-red-600 text-lg font-light" />
+        <IoAdd className="text-red-600 text-lg font-light text-red" />
         <p className="text-gray-400">Add task</p>
       </button>
       <Transition appear show={open} as={Fragment}>

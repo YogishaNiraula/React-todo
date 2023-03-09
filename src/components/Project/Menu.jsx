@@ -17,7 +17,7 @@ export default function ProjectMenu({ project }) {
       >
         <Menu.Button className="z-5 inline-flex w-full justify-center rounded-md">
           <BiDotsHorizontalRounded
-            className="ml-2 -mr-1 h-5 w-5"
+            className="ml-2 -mr-1 h-5 w-5 text-slate-400"
             aria-hidden="true"
           />
         </Menu.Button>
