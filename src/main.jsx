@@ -4,18 +4,15 @@ import App from "./App";
 import ErrorPage from "./routes/error-page";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Projects, { loader as projectLoader } from "./routes/projects";
+import Projects, {
+  loader as projectLoader,
+  action as projectAction,
+} from "./routes/projects";
 import Root, {
   action as rootAction,
   loader as rootLoader,
 } from "./routes/root";
-// import Project, { loader as contactLoader } from "./routes/projects";
-// import EditContact, { action as editAction } from "./routes/edit";
-// import { action as destroyAction } from "./routes/destroy";
-// import Root, {
-//   loader as rootLoader,
-//   action as rootAction,
-// } from "./routes/root";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,17 +25,8 @@ const router = createBrowserRouter([
         path: "projects/:projectId",
         element: <Projects />,
         loader: projectLoader,
+        action: projectAction,
       },
-      // {
-      //   path: "projects/:projectId/edit",
-      //   element: <EditContact />,
-      //   loader: contactLoader,
-      //   action: editAction,
-      // },
-      // {
-      //   path: "contacts/:contactId/destroy",
-      //   action: destroyAction,
-      // },
     ],
   },
 ]);
