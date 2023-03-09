@@ -10,7 +10,7 @@ export default function TaskList({ list }) {
           return (
             <li
               key={idx}
-              className="flex justify-between items-center border-b border-b-gray-200 py-2"
+              className="group flex justify-between items-center border-b border-b-gray-200 py-2"
             >
               <span className="flex items-center">
                 <Form replace method="post">
@@ -31,7 +31,7 @@ export default function TaskList({ list }) {
                 </Form>
                 <span className="text-lg">{item.title}</span>
               </span>
-              <span className="flex space-x-3">
+              <span className="flex space-x-3 invisible group-hover:visible">
                 <TaskEdit taskData={item} />
                 <Form method="post">
                   <input
