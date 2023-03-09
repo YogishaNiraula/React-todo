@@ -1,28 +1,15 @@
-import { useState } from "react";
-import { IoAdd, IoClose } from "react-icons/io5";
-import { createTask } from "../../utils/task";
+import { Fragment, useState } from "react";
+import { IoAdd } from "react-icons/io5";
+import { Form } from "react-router-dom";
+import { Dialog, Transition } from "@headlessui/react";
 
-export default function TaskAdd({ dispatch }) {
+export default function TaskAdd() {
   const [open, setOpen] = useState(false);
-  const [inputs, setInputs] = useState({});
-
-  const handleChange = (event) => {
-    const new_id = Math.floor(Math.random() * 1000);
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({
-      ...values,
-      id: new_id,
-      [name]: value,
-      completed: "false",
-    }));
-  };
-  const handleAddSubmit = async (event) => {
-    event.preventDefault();
-    await createTask({ project_id: "tq6zmi8", task: inputs });
+  const id = Math.floor(Math.random() * 1000);
+  const onClear = (event) => {
     setOpen(false);
-    setInputs({});
   };
+
   return (
     <div>
       <button
@@ -32,46 +19,87 @@ export default function TaskAdd({ dispatch }) {
         <IoAdd className="text-red-600 text-lg font-light" />
         <p className="text-gray-400">Add task</p>
       </button>
-      {open && (
-        <div className="fixed z-10 top-1/5 left-1/3 w-1/4 bg-white border border-gray-200 drop-shadow-2xl rounded-md p-5">
-          <form
-            onSubmit={handleAddSubmit}
-            className="flex flex-col justify-center"
+      <Transition appear show={open} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => setOpen(false)}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <input
-              type="text"
-              name="title"
-              placeholder="Task Name"
-              required
-              value={inputs.title || ""}
-              onChange={handleChange}
-              className="outline-none focus:outline-none bg-white text-black placeholder:text-gray-600 placeholder:font-medium text-lg font-medium my-3"
-            />
-            <textarea
-              type="textarea"
-              name="description"
-              placeholder="Description"
-              value={inputs.description || ""}
-              onChange={handleChange}
-              className="outline-none focus:outline-none bg-white text-black"
-            />
-            <div className="flex space-x-4 justify-end my-4">
-              <button
-                onClick={() => setOpen(false)}
-                className="bg-gray-200 text-black px-4 py-2 rounded"
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
               >
-                Cancel
-              </button>
-              <button
-                type="Submit"
-                className="bg-[#db4c3f] text-white px-4 py-2 rounded"
-              >
-                Add Task
-              </button>
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Form
+                    onSubmit={onClear}
+                    replace
+                    method="post"
+                    className="flex flex-col justify-center"
+                  >
+                    <input
+                      type="text"
+                      name="title"
+                      placeholder="Task Name"
+                      required
+                      className="outline-none focus:outline-none bg-white text-black placeholder:text-gray-600 placeholder:font-medium text-lg font-medium my-3"
+                    />
+                    <textarea
+                      type="textarea"
+                      name="description"
+                      placeholder="Description"
+                      className="outline-none focus:outline-none bg-white text-black"
+                    />
+                    <input type="text" hidden value={id} name="id" readOnly />
+                    <input
+                      type="text"
+                      hidden
+                      value="false"
+                      name="completed"
+                      readOnly
+                    />
+                    <div className="flex space-x-4 justify-end my-4">
+                      <button
+                        onClick={() => setOpen(false)}
+                        className="bg-gray-200 text-black px-4 py-2 rounded"
+                        type="button"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        name="_type"
+                        value="createTask"
+                        className="bg-red text-white px-4 py-2 rounded"
+                      >
+                        Add Task
+                      </button>
+                    </div>
+                  </Form>
+                </Dialog.Panel>
+              </Transition.Child>
             </div>
-          </form>
-        </div>
-      )}
+          </div>
+        </Dialog>
+      </Transition>
     </div>
   );
 }

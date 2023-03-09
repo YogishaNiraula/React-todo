@@ -1,17 +1,23 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FiEdit3 } from "react-icons/fi";
 import { Form } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 
-export default function TaskEdit({ taskData }) {
+export default function ProjectEdit({ projectData, active }) {
   const [open, setOpen] = useState(false);
   const onClear = (event) => {
     setOpen(false);
   };
+
   return (
     <div>
-      <button onClick={() => setOpen(true)}>
-        <FiEdit3 />
+      <button
+        onClick={() => setOpen(true)}
+        className={`${
+          active ? "bg-red text-white" : "text-gray-900"
+        } group flex w-full items-center rounded p-2 text-sm`}
+      >
+        <FiEdit3 className="mr-2 h-4 w-4" /> Edit
       </button>
       <Transition appear show={open} as={Fragment}>
         <Dialog
@@ -49,25 +55,19 @@ export default function TaskEdit({ taskData }) {
                     method="post"
                     className="flex flex-col justify-center"
                   >
+                    <label htmlFor="edit_name"></label>
                     <input
                       type="text"
-                      name="edit_title"
-                      defaultValue={taskData.title}
-                      placeholder="Task Name"
+                      name="edit_name"
+                      defaultValue={projectData.name}
+                      placeholder="Project Name"
                       required
                       className="outline-none focus:outline-none bg-white text-black placeholder:text-gray-600 placeholder:font-medium text-lg font-medium my-3"
-                    />
-                    <textarea
-                      type="textarea"
-                      name="edit_description"
-                      defaultValue={taskData.description}
-                      placeholder="Description"
-                      className="outline-none focus:outline-none bg-white text-black"
                     />
                     <input
                       type="text"
                       hidden
-                      value={taskData.id}
+                      value={projectData.id}
                       name="edit_id"
                       readOnly
                     />
@@ -83,10 +83,10 @@ export default function TaskEdit({ taskData }) {
                       <button
                         type="submit"
                         name="_type"
-                        value="editTask"
+                        value="editProject"
                         className="bg-red text-white px-4 py-2 rounded"
                       >
-                        Edit Task
+                        Edit Project
                       </button>
                     </div>
                   </Form>
