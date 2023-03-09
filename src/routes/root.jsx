@@ -40,6 +40,7 @@ export async function action({ request }) {
 }
 
 export async function loader() {
+  await insertDataInDB();
   const projects = await getProjects();
   return projects;
 }
@@ -48,9 +49,6 @@ export default function Root() {
   const projects = useLoaderData();
   let { projectId } = useParams();
   const [showNav, setShowNav] = useState(true);
-  useEffect(() => {
-    insertDataInDB();
-  });
 
   return (
     <div className="md:flex justify-start space-x-5">

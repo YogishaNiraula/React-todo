@@ -4,17 +4,17 @@ export async function createProject(project_name) {
   let id = Math.random().toString(36).substring(2, 9);
   const db = await openDB("Projects", 1);
   const tx = db.transaction("projects", "readwrite");
-  const response = await tx.store.add(
-    { id: id, name: project_name, tasks: [] },
-    id,
-  );
+  const response = await tx.store.add({
+    id: id,
+    name: project_name,
+    tasks: [],
+  });
 
   await tx.done;
   return response;
 }
 
 export async function getProjects() {
-  console.log(await openDB("Projects", 1));
   const db = await openDB("Projects", 1);
   const tx = db.transaction("projects", "readonly");
   let response = await tx.store.getAll();
