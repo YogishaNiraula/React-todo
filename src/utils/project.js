@@ -33,7 +33,12 @@ export async function getProject(id) {
 export async function editProject({ id, project_data }) {
   const db = await openDB("Projects", 1);
   const tx = db.transaction("projects", "readwrite");
-  let response = await tx.store.put({ id: id, name: project_data.name }, id);
+  let project = await tx.store.get(id);
+
+  let response = await tx.store.put({
+    ...project,
+    name: project_data.name,
+  });
   await tx.done;
   return response;
 }

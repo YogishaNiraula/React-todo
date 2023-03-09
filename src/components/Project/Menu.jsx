@@ -1,13 +1,11 @@
 import { Menu, Transition } from "@headlessui/react";
-import { useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { FiEdit3 } from "react-icons/fi";
-import { MdDeleteOutline } from "react-icons/md";
-import { Form } from "react-router-dom";
+
+import ProjectDelete from "./Delete";
 import ProjectEdit from "./Edit";
 
 export default function ProjectMenu({ project }) {
-  const [openModal, setOpenModal] = useState(false);
   return (
     <div className="w-56 text-right">
       <Menu
@@ -34,30 +32,16 @@ export default function ProjectMenu({ project }) {
             <div className="p-1">
               <Menu.Item>
                 {({ active }) => (
-                  <ProjectEdit projectData={project} active={active} />
+                  <Fragment>
+                    <ProjectEdit projectData={project} active={active} />
+                  </Fragment>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <Form replace method="post">
-                    <input
-                      type="text"
-                      hidden
-                      value={project.id}
-                      name="delete_id"
-                      readOnly
-                    />
-                    <button
-                      type="submit"
-                      name="_type"
-                      value="deleteProject"
-                      className={`${
-                        active ? "bg-red text-white" : "text-gray-900"
-                      } group flex w-full items-center rounded p-2 text-sm`}
-                    >
-                      <MdDeleteOutline className="mr-2 h-4 w-4" /> Delete
-                    </button>
-                  </Form>
+                  <Fragment>
+                    <ProjectDelete project={project} active={active} />
+                  </Fragment>
                 )}
               </Menu.Item>
             </div>

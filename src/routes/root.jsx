@@ -82,7 +82,7 @@ export default function Root() {
                           : "bg-transparent"
                       } group flex justify-between items-start my-1 hover:bg-slate-200 px-3 rounded py-1`}
                     >
-                      <p className="text-black text-sm font-normal">
+                      <p className="text-black text-sm font-normal truncate">
                         {project?.name}
                       </p>
                       <div>
