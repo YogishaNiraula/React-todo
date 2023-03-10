@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import { getProject } from "../utils/project";
 import TaskList from "../components/Task/List";
 import TaskAdd from "../components/Task/Add";
-import { createTask, deleteTask, editTask } from "../utils/task";
+import { completeTask, createTask, deleteTask, editTask } from "../utils/task";
 
 export async function action({ params, request }) {
   const formData = await request.formData();
@@ -38,6 +38,19 @@ export async function action({ params, request }) {
           edit_id,
           edit_title,
           edit_description,
+        },
+      });
+      return {};
+    case "completeTask":
+      const [task_id, task_complete] = [
+        formData.get("task_id"),
+        formData.get("task_complete"),
+      ];
+      await completeTask({
+        project_id: params.projectId,
+        task_data: {
+          id: task_id,
+          completed: task_complete,
         },
       });
       return {};
