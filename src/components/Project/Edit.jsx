@@ -13,7 +13,7 @@ export default function ProjectEdit({ projectData, active }) {
     <div>
       <button
         onClick={() => setOpen(true)}
-        className={`hover:bg-red hover:text-white text-gray-900 group flex w-full items-center rounded p-2 text-sm`}
+        className={`hover:bg-TodoRed hover:text-white text-gray-900 group flex w-full items-center rounded p-2 text-sm`}
       >
         <FiEdit3 className="mr-2 h-4 w-4" /> Edit
       </button>
@@ -82,7 +82,7 @@ export default function ProjectEdit({ projectData, active }) {
                         type="submit"
                         name="_type"
                         value="editProject"
-                        className="bg-red text-white px-4 py-2 rounded"
+                        className="bg-TodoRed text-white px-4 py-2 rounded"
                       >
                         Edit Project
                       </button>

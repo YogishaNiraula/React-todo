@@ -16,7 +16,7 @@ export default function TaskAdd() {
         onClick={() => setOpen(true)}
         className="flex items-center space-x-3 my-3 "
       >
-        <IoAdd className="text-red-600 text-lg font-light text-red" />
+        <IoAdd className="text-lg font-light text-red-600" />
         <p className="text-gray-400">Add task</p>
       </button>
       <Transition appear show={open} as={Fragment}>
@@ -88,7 +88,7 @@ export default function TaskAdd() {
                         type="submit"
                         name="_type"
                         value="createTask"
-                        className="bg-red text-white px-4 py-2 rounded"
+                        className="bg-TodoRed text-white px-4 py-2 rounded"
                       >
                         Add Task
                       </button>

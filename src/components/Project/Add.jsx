@@ -59,6 +59,7 @@ export default function ProjectAdd() {
                     </label>
                     <input
                       type="text"
+                      aria-label="project-name"
                       name="project_name"
                       id="project_name"
                       placeholder="Project Name"
@@ -78,6 +79,7 @@ export default function ProjectAdd() {
                         type="Submit"
                         name="_type"
                         value="createProject"
+                        aria-label="add-project-btn"
                         onClick={() => setOpen(false)}
                         className="bg-[#db4c3f] text-white px-4 py-2 rounded"
                       >

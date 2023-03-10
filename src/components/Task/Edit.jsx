@@ -84,7 +84,7 @@ export default function TaskEdit({ taskData }) {
                         type="submit"
                         name="_type"
                         value="editTask"
-                        className="bg-red text-white px-4 py-2 rounded"
+                        className="bg-TodoRed text-white px-4 py-2 rounded"
                       >
                         Edit Task
                       </button>
