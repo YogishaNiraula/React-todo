@@ -45,7 +45,7 @@ export default function TaskList({ list }) {
                 </Form>
                 <span
                   className={`${
-                    item.completed === "true" ? "line-through" : ""
+                    item.completed === "true" ? "decoration-2 line-through" : ""
                   } text-lg`}
                 >
                   {item.title}

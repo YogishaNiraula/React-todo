@@ -1,17 +1,4 @@
-import { openDB } from "idb";
-import { getProject, getProjects } from "./project";
-
-async function withProjectDB(fn, mode = "readwrite") {
-  try {
-    const db = await openDB("Projects", 1);
-    const tx = db.transaction("projects", mode);
-    const output = await fn(tx);
-    await tx.done;
-    return output;
-  } catch (error) {
-    console.log(error);
-  }
-}
+import { withProjectDB } from "./indexDB";
 
 export async function createTask({ project_id, task }) {
   return await withProjectDB(async (tx) => {
