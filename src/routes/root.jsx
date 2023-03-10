@@ -40,6 +40,7 @@ export async function action({ request }) {
 }
 
 export async function loader() {
+  await insertDataInDB();
   const projects = await getProjects();
   return projects;
 }
@@ -48,13 +49,10 @@ export default function Root() {
   const projects = useLoaderData();
   let { projectId } = useParams();
   const [showNav, setShowNav] = useState(true);
-  useEffect(() => {
-    insertDataInDB();
-  });
 
   return (
-    <div className="md:flex justify-start space-x-5">
-      <aside className="min-h-full p-10 w-[30rem]">
+    <div className="lg:flex justify-start space-x-5">
+      <aside className="min-h-full p-10 w-96">
         <div className="flex items-center justify-between">
           <h5>Projects</h5>
           <div className="flex items-center space-x-3">
@@ -77,6 +75,7 @@ export default function Root() {
                 {projects.map((project) => (
                   <li key={project.id}>
                     <NavLink
+                      data-testid={`project-item`}
                       to={`projects/${project.id}`}
                       className={`${
                         project.id === projectId
@@ -84,7 +83,7 @@ export default function Root() {
                           : "bg-transparent"
                       } group flex justify-between items-start my-1 hover:bg-slate-200 px-3 rounded py-1`}
                     >
-                      <p className="text-black text-sm font-normal">
+                      <p className="text-black text-sm font-normal truncate">
                         {project?.name}
                       </p>
                       <div>
@@ -100,8 +99,10 @@ export default function Root() {
           </nav>
         )}
       </aside>
-      <div className="container mx-auto p-10">
-        <Outlet />
+      <div className="lg:w-1/2">
+        <div className="container mx-auto p-10">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

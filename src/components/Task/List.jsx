@@ -3,6 +3,9 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Form } from "react-router-dom";
 
 export default function TaskList({ list }) {
+  const handleComplete = (completed) => {
+    return completed === "true" ? "false" : "true";
+  };
   return (
     <div>
       <ul>
@@ -21,18 +24,35 @@ export default function TaskList({ list }) {
                     hidden
                     readOnly
                   />
+                  <input
+                    type="text"
+                    name="task_complete"
+                    value={handleComplete(item.completed)}
+                    hidden
+                    readOnly
+                  />
                   <button
-                    className="border-2 border-blue-500 bg-blue-300 p-2 rounded-full mx-2 cursor-pointer"
+                    className={`border-2 ${
+                      item.completed === "true"
+                        ? "border-red-500 bg-red-300"
+                        : "border-blue-500 bg-blue-300"
+                    } p-2 rounded-full mx-2 cursor-pointer`}
                     type="submit"
                     name="_type"
                     id="complete_task"
-                    value="deleteTask"
+                    value="completeTask"
                   />
                 </Form>
-                <span className="text-lg">{item.title}</span>
+                <span
+                  className={`${
+                    item.completed === "true" ? "decoration-2 line-through" : ""
+                  } text-lg`}
+                >
+                  {item.title}
+                </span>
               </span>
               <span className="flex space-x-3 invisible group-hover:visible">
-                <TaskEdit taskData={item} />
+                {item.completed === "false" && <TaskEdit taskData={item} />}
                 <Form method="post">
                   <input
                     type="text"
