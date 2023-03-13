@@ -18,7 +18,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.2",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
@@ -30,18 +31,33 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
+    "jest": "^29.4.3",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
-    "jest": "^29.4.3",
     "vite": "^4.1.0"
   },
   "jest": {
-    "testEnvironment": "jsdom",
+    "roots": [
+      "<rootDir>/src"
+    ],
     "setupFilesAfterEnv": [
       "<rootDir>/jest-setup.js"
     ],
+    "setupFiles": [
+      "whatwg-fetch"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jsdom",
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy"
-    }
+    },
+    "resetMocks": true
   }
 }

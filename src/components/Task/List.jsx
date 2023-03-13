@@ -1,6 +1,7 @@
 import TaskEdit from "./Edit";
 import { MdDeleteOutline } from "react-icons/md";
 import { Form } from "react-router-dom";
+import React from "react";
 
 export default function TaskList({ list }) {
   const handleComplete = (completed) => {
@@ -44,6 +45,7 @@ export default function TaskList({ list }) {
                   />
                 </Form>
                 <span
+                  data-testid="list"
                   className={`${
                     item.completed === "true" ? "decoration-2 line-through" : ""
                   } text-lg`}

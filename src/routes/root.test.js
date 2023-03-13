@@ -20,13 +20,15 @@ describe("Root", () => {
     ];
     loader.mockResolvedValueOnce(projects);
     // await loader(projects);
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter initialEntries={["/projects/1"]}>
         <Root />
       </MemoryRouter>,
     );
-    expect(getByText("Projects", { exact: false })).toBeInTheDocument();
-    // const projectItems = screen.getAllByTestId("custom-element");
+    // screen.debug(getByText(/Projects/i).textContent);
+    // expect(getByText("Projects", { exact: false })).toBeInTheDocument();
+    const projectItems = screen.getByTestId("custom-element");
+
     // expect(projectItems).toHaveLength(2);
     // expect(projectItems[0]).toHaveTextContent("Project 1");
     // expect(projectItems[1]).toHaveTextContent("Project 2");

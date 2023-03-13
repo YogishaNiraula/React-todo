@@ -54,7 +54,7 @@ export default function Root() {
     <div className="lg:flex justify-start space-x-5">
       <aside className="min-h-full p-10 w-96">
         <div className="flex items-center justify-between">
-          <h5>Projects</h5>
+          <h5 data-testid="project1">Projects</h5>
           <div className="flex items-center space-x-3">
             <ProjectAdd />
             {showNav ? (
