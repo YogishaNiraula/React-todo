@@ -21,11 +21,9 @@ export async function getProjects() {
 }
 
 export async function getProject(id) {
-  const db = await openDB("Projects", 1);
-  const tx = db.transaction("projects", "readonly");
-  let response = await tx.store.get(id);
-  await tx.done;
-  return response;
+  return await withProjectDB(async (tx) => {
+    return await tx.store.get(id);
+  }, "readonly");
 }
 
 export async function editProject({ id, project_data }) {

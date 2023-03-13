@@ -71,11 +71,10 @@ export default function Root() {
         {showNav && (
           <nav className="-ml-3">
             {projects.length ? (
-              <ul>
+              <ul data-testid="project-item">
                 {projects.map((project) => (
-                  <li key={project.id}>
+                  <li key={project.id} data-testid="custom-element">
                     <NavLink
-                      data-testid={`project-item`}
                       to={`projects/${project.id}`}
                       className={`${
                         project.id === projectId
