@@ -61,11 +61,11 @@ export async function action({ params, request }) {
 
 export async function loader({ params }) {
   const project = await getProject(params.projectId);
-  return { project };
+  return project;
 }
 
 export default function Projects() {
-  const { project } = useLoaderData();
+  const project = useLoaderData();
   return (
     <div className="mb-20">
       <h5 className="text-xl font-medium">Tasks</h5>
