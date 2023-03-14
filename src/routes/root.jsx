@@ -19,6 +19,7 @@ import ProjectAdd from "../components/Project/Add";
 
 export async function action({ request }) {
   const formData = await request.formData();
+  console.log(formData);
   const actionType = formData.get("_type");
   switch (actionType) {
     case "createProject":
@@ -54,27 +55,28 @@ export default function Root() {
     <div className="lg:flex justify-start space-x-5">
       <aside className="min-h-full p-10 w-96">
         <div className="flex items-center justify-between">
-          <h5 data-testid="project1">Projects</h5>
+          <h5>Projects</h5>
           <div className="flex items-center space-x-3">
             <ProjectAdd />
             {showNav ? (
-              <button onClick={() => setShowNav(false)}>
+              <button onClick={() => setShowNav(false)} data-testid="close">
                 <MdKeyboardArrowUp />
               </button>
             ) : (
-              <button onClick={() => setShowNav(true)}>
+              <button onClick={() => setShowNav(true)} data-testid="open">
                 <MdKeyboardArrowDown />
               </button>
             )}
           </div>
         </div>
         {showNav && (
-          <nav className="-ml-3">
+          <nav className="-ml-3" data-testid="nav">
             {projects?.length ? (
               <ul data-testid="project-item">
                 {projects?.map((project) => (
                   <li key={project.id}>
                     <NavLink
+                      data-testid={`project-${project.id}`}
                       to={`projects/${project.id}`}
                       className={`${
                         project?.id === projectId
