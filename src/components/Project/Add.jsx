@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, React } from "react";
 import { BsPlus } from "react-icons/bs";
 import { Form } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
@@ -82,6 +82,7 @@ export default function ProjectAdd() {
                         aria-label="add-project-btn"
                         onClick={() => setOpen(false)}
                         className="bg-[#db4c3f] text-white px-4 py-2 rounded"
+                        data-testid="add-button"
                       >
                         Add
                       </button>
