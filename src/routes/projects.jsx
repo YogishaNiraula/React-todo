@@ -3,8 +3,10 @@ import { getProject } from "../utils/project";
 import TaskList from "../components/Task/List";
 import TaskAdd from "../components/Task/Add";
 import { completeTask, createTask, deleteTask, editTask } from "../utils/task";
-
+import { handleTaskComplete } from "../components/Task/List";
 export async function action({ params, request }) {
+  console.log(request);
+  handleTaskComplete();
   const formData = await request.formData();
   const actionType = formData.get("_type");
   switch (actionType) {
@@ -61,7 +63,7 @@ export async function action({ params, request }) {
 
 export async function loader({ params }) {
   const project = await getProject(params.projectId);
-  return project;
+  return { project };
 }
 
 export default function Projects() {
@@ -69,7 +71,10 @@ export default function Projects() {
   return (
     <div className="mb-20">
       <h5 className="text-xl font-medium">Tasks</h5>
-      <TaskList list={project?.tasks} />
+      <TaskList
+        list={project?.project?.tasks}
+        projectId={project?.project?.id}
+      />
       <TaskAdd />
     </div>
   );

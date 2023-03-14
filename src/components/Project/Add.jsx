@@ -8,13 +8,17 @@ export default function ProjectAdd() {
   const onClear = (event) => {
     setOpen(false);
   };
-
   return (
     <div>
-      <button onClick={() => setOpen(true)}>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        data-testid="dialog-button"
+      >
+        <span className="sr-only">Add Project Button</span>
         <BsPlus />
       </button>
-      <Transition appear show={open} as={Fragment}>
+      <Transition appear show={open} as={Fragment} data-testid="mock-dialog">
         <Dialog
           as="div"
           className="relative z-10"
