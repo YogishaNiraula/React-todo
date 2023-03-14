@@ -1,55 +1,46 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { MemoryRouter, Route, Router } from "react-router-dom";
-import Root, { action, loader } from "./root";
+import { render } from "@testing-library/react";
+import { MemoryRouter, Route, Routes, useLoaderData } from "react-router-dom";
+import Root, { loader } from "./root";
+import { createProject } from "../utils/project";
 
-jest.mock("../utils/indexDB");
-jest.mock("../utils/project");
-jest.mock("./root", () => ({
-  __esModule: true,
-  default: jest.fn(),
-  action: jest.fn(),
-  loader: jest.fn(),
+jest.mock("../utils/project", () => ({
+  getProjects: jest.fn().mockResolvedValue([
+    { id: "1", name: "Project 1" },
+    { id: "2", name: "Project 2" },
+  ]),
 }));
+jest.mock("../utils/indexDB");
 
-describe("Root", () => {
-  it("renders a list of projects using loader", async () => {
-    const projects = [
-      { id: "1", name: "Project 1" },
-      { id: "2", name: "Project 2" },
-    ];
-    loader.mockResolvedValueOnce(projects);
-    // await loader(projects);
-    const { getByTestId } = render(
-      <MemoryRouter initialEntries={["/projects/1"]}>
-        <Root />
-      </MemoryRouter>,
-    );
-    // screen.debug(getByText(/Projects/i).textContent);
-    // expect(getByText("Projects", { exact: false })).toBeInTheDocument();
-    const projectItems = screen.getByTestId("custom-element");
-
-    // expect(projectItems).toHaveLength(2);
-    // expect(projectItems[0]).toHaveTextContent("Project 1");
-    // expect(projectItems[1]).toHaveTextContent("Project 2");
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useLoaderData: jest.fn().mockResolvedValue([
+    { id: "1", name: "Project 1" },
+    { id: "2", name: "Project 2" },
+  ]),
+}));
+describe("Root route", () => {
+  it("renders a list of projects", async () => {
+    const { findByTestId } = await render(<Root />);
+    const a = await useLoaderData();
+    console.log(a);
+    // const projectItems = await findByTestId("project-items");
+    // expect(projectItems.children.length).toBe(2);
   });
+
+  // it("adds project with actions", async () => {
+  //   const { findByTestId } = await render(<Root />);
+
+  //   let new_project = await createProject("ProjectName1");
+  //   console.log("newProject", new_project);
+  //   // expect(new_project).toBe()
+  // });
 });
 
-// import { loader } from "./loader ko path";
-// import { getProject } from "../utils/project";
-
-// jest.mock("../utils/project");
-
-// describe("loader", () => {
-//   it("should return project data", async () => {
-//     const projectId = "123";
-//     const projectData = { id: projectId, name: "Test Project" };
-//     getProject.mockResolvedValue(projectData);
-
-//     const params = { projectId };
-//     const result = await loader({ params });
-
-//     expect(getProject).toHaveBeenCalledWith(projectId);
-//     expect(result).toEqual({ project: projectData });
+// describe("loader function", () => {
+//   it("loads projects from the API", async () => {
+//     const projects = await loader();
+//     expect(projects.length).toBe(2);
+//     expect(projects[0].name).toBe("Project 1");
+//     expect(projects[1].name).toBe("Project 2");
 //   });
 // });

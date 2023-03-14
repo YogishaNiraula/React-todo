@@ -70,14 +70,14 @@ export default function Root() {
         </div>
         {showNav && (
           <nav className="-ml-3">
-            {projects.length ? (
+            {projects?.length ? (
               <ul data-testid="project-item">
-                {projects.map((project) => (
-                  <li key={project.id} data-testid="custom-element">
+                {projects?.map((project) => (
+                  <li key={project.id}>
                     <NavLink
                       to={`projects/${project.id}`}
                       className={`${
-                        project.id === projectId
+                        project?.id === projectId
                           ? "bg-slate-200"
                           : "bg-transparent"
                       } group flex justify-between items-start my-1 hover:bg-slate-200 px-3 rounded py-1`}
