@@ -11,6 +11,7 @@ export default function ProjectDelete({ project }) {
   return (
     <div>
       <button
+        data-testid="delete"
         onClick={() => setOpen(true)}
         className={`hover:bg-TodoRed hover:text-white text-gray-900 group flex w-full items-center rounded p-2 text-sm`}
       >
