@@ -3,17 +3,6 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Form, redirect, useSubmit } from "react-router-dom";
 import { completeTask } from "../../utils/task";
 
-export const handleTaskComplete = async (projectId, task_id, task_complete) => {
-  const response = await completeTask({
-    project_id: projectId,
-    task_data: {
-      id: task_id,
-      completed: task_complete,
-    },
-  });
-  return redirect(`/`);
-};
-
 export default function TaskList({ list, projectId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +11,14 @@ export default function TaskList({ list, projectId }) {
       formData.get("task_id"),
       formData.get("task_complete"),
     ];
-    await handleComplete(projectId, task_id, task_complete);
+    const response = await completeTask({
+      project_id: projectId,
+      task_data: {
+        id: task_id,
+        completed: task_complete,
+      },
+    });
+    return redirect(`/`);
   };
   const handleComplete = (completed) => {
     return completed === "true" ? "false" : "true";

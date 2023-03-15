@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, useLoaderData } from "react-router-dom";
 import Root, { action } from "./root";
 import Projects from "./projects";
 import { createProject } from "../utils/project";
+import ProjectAdd from "../components/Project/Add";
+import { act } from "react-dom/test-utils";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -68,20 +70,27 @@ describe("Root route", () => {
     expect(document.body.textContent).toContain("Tasks");
   });
 
-  // it("adds a project", async () => {
-  //   render(
-  //     <MemoryRouter initialEntries={["/"]}>
-  //       <Root />
-  //     </MemoryRouter>,
-  //   );
-  //   // console.log(
-  //   //   await action({
-  //   //     request: {
-  //   //       formData: {},
-  //   //     },
-  //   //   }),
-  //   // );
-  //   let results = await createProject("Project Test");
-  //   console.log(await createProject);
-  // });
+  it("adds a project", async () => {
+    // const { debug, getByTestId } = act(() => {
+    //   render(
+    //     <MemoryRouter initialEntries={["/"]}>
+    //       <Root>
+    //         <ProjectAdd />
+    //       </Root>
+    //     </MemoryRouter>,
+    //   );
+    // });
+    // const button = await screen.getByTestId("dialog-button");
+    // const a = await fireEvent.click(button);
+    // screen.debug();
+    // console.log(
+    //   await action({
+    //     request: {
+    //       formData: {},
+    //     },
+    //   }),
+    // );
+    // let results = await createProject("Project Test");
+    // console.log(await createProject);
+  });
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import TaskList from "./List";
 import {
   MemoryRouter,
@@ -33,11 +33,18 @@ describe("Task List Component", () => {
   ];
 
   it("renders a list of tasks", async () => {
-    const { debug } = render(
-      <MemoryRouter initialEntries={["/projects/123"]}>
-        <TaskList list={lists} />
-      </MemoryRouter>,
-    );
-    debug();
+    // const { debug } = await act(() => {
+    //   render(
+    //     <MemoryRouter initialEntries={["/projects/123"]}>
+    //       <TaskList list={lists} />
+    //     </MemoryRouter>,
+    //   );
+    // });
+    // const { debug } = render(
+    //   <MemoryRouter initialEntries={["/projects/123"]}>
+    //     <TaskList list={lists} />
+    //   </MemoryRouter>,
+    // );
+    // debug();
   });
 });

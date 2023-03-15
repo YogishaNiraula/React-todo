@@ -3,10 +3,8 @@ import { getProject } from "../utils/project";
 import TaskList from "../components/Task/List";
 import TaskAdd from "../components/Task/Add";
 import { completeTask, createTask, deleteTask, editTask } from "../utils/task";
-import { handleTaskComplete } from "../components/Task/List";
+
 export async function action({ params, request }) {
-  console.log(request);
-  handleTaskComplete();
   const formData = await request.formData();
   const actionType = formData.get("_type");
   switch (actionType) {
@@ -17,11 +15,11 @@ export async function action({ params, request }) {
         formData.get("description"),
         formData.get("completed"),
       ];
-      await createTask({
+      const res = await createTask({
         project_id: params.projectId,
         task: { id, title, description, completed },
       });
-      return {};
+      return res;
     case "deleteTask":
       await deleteTask({
         project_id: params.projectId,
@@ -57,7 +55,7 @@ export async function action({ params, request }) {
       });
       return {};
     default:
-      break;
+      return "abc";
   }
 }
 
