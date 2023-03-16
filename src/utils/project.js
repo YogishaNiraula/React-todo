@@ -9,6 +9,7 @@ export async function createProject(project_name) {
       name: project_name,
       tasks: [],
     });
+    return id;
   });
 }
 
