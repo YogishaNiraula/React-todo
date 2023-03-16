@@ -1,9 +1,8 @@
 import { openDB } from "idb";
 import { withProjectDB } from "./indexDB";
 
-export async function createProject(project_name) {
+export async function createProject({ id, project_name }) {
   return await withProjectDB(async (tx) => {
-    let id = Math.random().toString(36).substring(2, 9);
     await tx.store.add({
       id: id,
       name: project_name,

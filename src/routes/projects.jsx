@@ -19,7 +19,7 @@ export async function action({ params, request }) {
         project_id: params.projectId,
         task: { id, title, description, completed },
       });
-      return res;
+      return {};
     case "deleteTask":
       await deleteTask({
         project_id: params.projectId,

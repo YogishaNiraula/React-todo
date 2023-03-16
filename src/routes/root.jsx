@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   NavLink,
   Outlet,
@@ -19,11 +19,14 @@ import ProjectAdd from "../components/Project/Add";
 
 export async function action({ request }) {
   const formData = await request.formData();
-  console.log(formData);
   const actionType = formData.get("_type");
   switch (actionType) {
     case "createProject":
-      const projectId = await createProject(formData.get("project_name"));
+      let id = Math.random().toString(36).substring(2, 9);
+      const projectId = await createProject({
+        id: id,
+        project_name: formData.get("project_name"),
+      });
       return redirect(`/projects/${projectId}`);
     case "deleteProject":
       await deleteProject(formData.get("delete_id"));

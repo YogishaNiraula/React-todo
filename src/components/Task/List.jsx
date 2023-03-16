@@ -1,29 +1,11 @@
 import TaskEdit from "./Edit";
 import { MdDeleteOutline } from "react-icons/md";
-import { Form, redirect, useSubmit } from "react-router-dom";
-import { completeTask } from "../../utils/task";
+import { Form } from "react-router-dom";
 
-export default function TaskList({ list, projectId }) {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const [task_id, task_complete] = [
-      formData.get("task_id"),
-      formData.get("task_complete"),
-    ];
-    const response = await completeTask({
-      project_id: projectId,
-      task_data: {
-        id: task_id,
-        completed: task_complete,
-      },
-    });
-    return redirect(`/`);
-  };
+export default function TaskList({ list }) {
   const handleComplete = (completed) => {
     return completed === "true" ? "false" : "true";
   };
-  const handleDelete = () => {};
   return (
     <div>
       <ul>
@@ -34,7 +16,7 @@ export default function TaskList({ list, projectId }) {
               className="group flex justify-between items-center border-b border-b-gray-200 py-2"
             >
               <span className="flex items-center">
-                <form replace="true" method="post" onSubmit={handleSubmit}>
+                <Form replace method="post">
                   <input
                     type="text"
                     name="task_id"
@@ -56,12 +38,12 @@ export default function TaskList({ list, projectId }) {
                         : "border-blue-500 bg-blue-300"
                     } p-2 rounded-full mx-2 cursor-pointer`}
                     type="submit"
+                    name="_type"
                     id="complete_task"
                     value="completeTask"
                   />
-                </form>
+                </Form>
                 <span
-                  data-testid="list"
                   className={`${
                     item.completed === "true" ? "decoration-2 line-through" : ""
                   } text-lg`}
@@ -71,7 +53,7 @@ export default function TaskList({ list, projectId }) {
               </span>
               <span className="flex space-x-3 invisible group-hover:visible">
                 {item.completed === "false" && <TaskEdit taskData={item} />}
-                <Form method="post" onSubmit={handleDelete}>
+                <Form method="post">
                   <input
                     type="text"
                     name="task_id"

@@ -55,5 +55,6 @@ export async function completeTask({ project_id, task_data }) {
         return task;
       }),
     });
+    return await tx.store.get(project_id);
   });
 }

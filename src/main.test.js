@@ -41,10 +41,3 @@ describe("main.js", () => {
     expect(Projects).toHaveBeenCalledTimes(1);
   });
 });
-
-// -renders project list
-// -opens and closes project list
-// -navigates to project details page
-// -check action function
-// -deletes a project
-// -edits a project and redirects wherever you have written to redirect

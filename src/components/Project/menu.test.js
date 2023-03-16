@@ -27,7 +27,7 @@ describe("Menu Component", () => {
     const menuButton = getByRole("button");
 
     await act(async () => {
-      await fireEvent.click(menuButton);
+      fireEvent.click(menuButton);
     });
 
     const deleteButton = getByTestId("delete");

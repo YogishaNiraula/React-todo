@@ -1,23 +1,14 @@
-import React, { useState } from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import React from "react";
+import { fireEvent, render } from "@testing-library/react";
 import { MemoryRouter, useLoaderData } from "react-router-dom";
-import Root, { action } from "./root";
+import Root from "./root";
 import Projects from "./projects";
-import { createProject } from "../utils/project";
-import ProjectAdd from "../components/Project/Add";
-import { act } from "react-dom/test-utils";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useLoaderData: jest.fn(),
 }));
 
-jest.mock("../utils/indexDB", () => ({
-  ...jest.requireActual("../utils/indexDB"),
-}));
-jest.mock("../utils/project", () => ({
-  createProject: jest.fn(),
-}));
 describe("Root route", () => {
   const projects = [
     { id: 1, name: "Project 1" },
@@ -27,6 +18,7 @@ describe("Root route", () => {
   beforeEach(() => {
     useLoaderData.mockReturnValue(projects);
   });
+
   it("renders a list of projects", async () => {
     const { findByTestId } = render(
       <MemoryRouter initialEntries={["/"]}>
@@ -68,29 +60,5 @@ describe("Root route", () => {
     const projectLink = await getByRole("link", { name: "Project 1" });
     const a = fireEvent.click(projectLink);
     expect(document.body.textContent).toContain("Tasks");
-  });
-
-  it("adds a project", async () => {
-    // const { debug, getByTestId } = act(() => {
-    //   render(
-    //     <MemoryRouter initialEntries={["/"]}>
-    //       <Root>
-    //         <ProjectAdd />
-    //       </Root>
-    //     </MemoryRouter>,
-    //   );
-    // });
-    // const button = await screen.getByTestId("dialog-button");
-    // const a = await fireEvent.click(button);
-    // screen.debug();
-    // console.log(
-    //   await action({
-    //     request: {
-    //       formData: {},
-    //     },
-    //   }),
-    // );
-    // let results = await createProject("Project Test");
-    // console.log(await createProject);
   });
 });
