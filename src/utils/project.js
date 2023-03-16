@@ -1,9 +1,8 @@
 import { openDB } from "idb";
 import { withProjectDB } from "./indexDB";
 
-export async function createProject(project_name) {
+export async function createProject({ id, project_name }) {
   return await withProjectDB(async (tx) => {
-    let id = Math.random().toString(36).substring(2, 9);
     await tx.store.add({
       id: id,
       name: project_name,
@@ -22,11 +21,9 @@ export async function getProjects() {
 }
 
 export async function getProject(id) {
-  const db = await openDB("Projects", 1);
-  const tx = db.transaction("projects", "readonly");
-  let response = await tx.store.get(id);
-  await tx.done;
-  return response;
+  return await withProjectDB(async (tx) => {
+    return await tx.store.get(id);
+  }, "readonly");
 }
 
 export async function editProject({ id, project_data }) {

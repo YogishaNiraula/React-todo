@@ -15,7 +15,7 @@ export async function action({ params, request }) {
         formData.get("description"),
         formData.get("completed"),
       ];
-      await createTask({
+      const res = await createTask({
         project_id: params.projectId,
         task: { id, title, description, completed },
       });
@@ -55,7 +55,7 @@ export async function action({ params, request }) {
       });
       return {};
     default:
-      break;
+      return "abc";
   }
 }
 
@@ -65,11 +65,14 @@ export async function loader({ params }) {
 }
 
 export default function Projects() {
-  const { project } = useLoaderData();
+  const project = useLoaderData();
   return (
     <div className="mb-20">
       <h5 className="text-xl font-medium">Tasks</h5>
-      <TaskList list={project?.tasks} />
+      <TaskList
+        list={project?.project?.tasks}
+        projectId={project?.project?.id}
+      />
       <TaskAdd />
     </div>
   );

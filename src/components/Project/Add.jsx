@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, React } from "react";
 import { BsPlus } from "react-icons/bs";
 import { Form } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
@@ -8,13 +8,17 @@ export default function ProjectAdd() {
   const onClear = (event) => {
     setOpen(false);
   };
-
   return (
     <div>
-      <button onClick={() => setOpen(true)}>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        data-testid="dialog-button"
+      >
+        <span className="sr-only">Add Project Button</span>
         <BsPlus />
       </button>
-      <Transition appear show={open} as={Fragment}>
+      <Transition appear show={open} as={Fragment} data-testid="mock-dialog">
         <Dialog
           as="div"
           className="relative z-10"
@@ -82,6 +86,7 @@ export default function ProjectAdd() {
                         aria-label="add-project-btn"
                         onClick={() => setOpen(false)}
                         className="bg-[#db4c3f] text-white px-4 py-2 rounded"
+                        data-testid="add-button"
                       >
                         Add
                       </button>

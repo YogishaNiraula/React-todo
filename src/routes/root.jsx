@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   NavLink,
   Outlet,
@@ -22,7 +22,11 @@ export async function action({ request }) {
   const actionType = formData.get("_type");
   switch (actionType) {
     case "createProject":
-      const projectId = await createProject(formData.get("project_name"));
+      let id = Math.random().toString(36).substring(2, 9);
+      const projectId = await createProject({
+        id: id,
+        project_name: formData.get("project_name"),
+      });
       return redirect(`/projects/${projectId}`);
     case "deleteProject":
       await deleteProject(formData.get("delete_id"));
@@ -58,27 +62,27 @@ export default function Root() {
           <div className="flex items-center space-x-3">
             <ProjectAdd />
             {showNav ? (
-              <button onClick={() => setShowNav(false)}>
+              <button onClick={() => setShowNav(false)} data-testid="close">
                 <MdKeyboardArrowUp />
               </button>
             ) : (
-              <button onClick={() => setShowNav(true)}>
+              <button onClick={() => setShowNav(true)} data-testid="open">
                 <MdKeyboardArrowDown />
               </button>
             )}
           </div>
         </div>
         {showNav && (
-          <nav className="-ml-3">
-            {projects.length ? (
-              <ul>
-                {projects.map((project) => (
+          <nav className="-ml-3" data-testid="nav">
+            {projects?.length ? (
+              <ul data-testid="project-item">
+                {projects?.map((project) => (
                   <li key={project.id}>
                     <NavLink
-                      data-testid={`project-item`}
+                      data-testid={`project-${project.id}`}
                       to={`projects/${project.id}`}
                       className={`${
-                        project.id === projectId
+                        project?.id === projectId
                           ? "bg-slate-200"
                           : "bg-transparent"
                       } group flex justify-between items-start my-1 hover:bg-slate-200 px-3 rounded py-1`}
